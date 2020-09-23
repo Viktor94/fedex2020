@@ -15,19 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/scripts")
 public class ScriptController {
 
-   private ProgramService programService;
-   private StudentService studentService;
+  private final ProgramService programService;
+  private final StudentService studentService;
 
-    @Autowired
-    public ScriptController(ProgramService programService, StudentService studentService) {
-        this.programService = programService;
-        this.studentService = studentService;
-    }
+  @Autowired
+  public ScriptController(ProgramService programService, StudentService studentService) {
+    this.programService = programService;
+    this.studentService = studentService;
+  }
 
-    @PostMapping(value = "")
-    public ResponseEntity<?> addScript(@RequestBody ScriptDTO scriptDTO) {
-        studentService.addStudent(scriptDTO.getStudent());
-        programService.savePrograms(scriptDTO.getProgramDTOList());
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+  @PostMapping(value = "")
+  public ResponseEntity<?> addScript(@RequestBody ScriptDTO scriptDTO) {
+    studentService.addStudent(scriptDTO.getStudent());
+    programService.savePrograms(scriptDTO.getProgramDTOList());
+
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
 }
