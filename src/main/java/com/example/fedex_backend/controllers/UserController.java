@@ -1,6 +1,7 @@
 package com.example.fedex_backend.controllers;
 
 import com.example.fedex_backend.exceptions.UsernameAlreadyTakenException;
+import com.example.fedex_backend.models.dtos.ResponseDTO;
 import com.example.fedex_backend.security.JwtUtil;
 import com.example.fedex_backend.exceptions.MissingFieldException;
 import com.example.fedex_backend.exceptions.MissingParametersException;
@@ -49,6 +50,7 @@ public class UserController {
 
     final UserDetails userDetails = userService.loadUserByUsername(dto.getUsername());
     final String jwt = jwtUtil.generateToken(userDetails, 60);
+    ResponseDTO responseDTO = new ResponseDTO(jwt);
 
     return new ResponseEntity<>(jwt, HttpStatus.OK);
   }
