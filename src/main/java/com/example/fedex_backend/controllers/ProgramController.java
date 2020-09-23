@@ -20,7 +20,7 @@ public class ProgramController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getAllSoups() {
+    public ResponseEntity<?> getAllProgram() {
         return new ResponseEntity<>(programService.getAllProgram(), HttpStatus.OK);
     }
 }
