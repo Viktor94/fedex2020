@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class ProgramServiceImpl implements ProgramService {
 
-    private ProgramRepository programRepository;
+    private final ProgramRepository programRepository;
 
     @Autowired
     public ProgramServiceImpl(ProgramRepository programRepository) {
@@ -29,7 +29,7 @@ public class ProgramServiceImpl implements ProgramService {
         ArrayList<Program> programList = new ArrayList<>();
         for (ProgramDTO programDTO: programDTOlist) {
             Program program = new Program(programDTO);
-            if (!programRepository.findByProgramName(program.getProgramName())){
+            if (programRepository.findByProgramName(program.getProgramName()).isEmpty()){
                 programList.add(program);
             }
         }
