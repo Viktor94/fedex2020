@@ -24,7 +24,7 @@ public class ProgramServiceImpl implements ProgramService {
   }
 
   @Override
-  public void savePrograms(List<ProgramDTO> programDTOlist) {
+  public ArrayList<Program>  savePrograms(List<ProgramDTO> programDTOlist) {
     ArrayList<Program> programList = new ArrayList<>();
     for (ProgramDTO programDTO : programDTOlist) {
       Program program = new Program(programDTO);
@@ -33,5 +33,6 @@ public class ProgramServiceImpl implements ProgramService {
       }
     }
     programRepository.saveAll(programList);
+    return programList;
   }
 }

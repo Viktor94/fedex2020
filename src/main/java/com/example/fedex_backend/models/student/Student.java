@@ -1,6 +1,9 @@
 package com.example.fedex_backend.models.student;
 
 import java.util.Date;
+import java.util.List;
+
+import com.example.fedex_backend.models.program.Program;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +25,9 @@ public class Student {
 
   @Column(unique = true)
   private String scriptCode;
+
+  @ManyToMany
+  private List<Program> programs;
 
   private String firstName;
   private String lastName;

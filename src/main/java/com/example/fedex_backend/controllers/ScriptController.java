@@ -26,8 +26,7 @@ public class ScriptController {
 
   @PostMapping(value = "")
   public ResponseEntity<?> addScript(@RequestBody ScriptDTO scriptDTO) {
-    studentService.addStudent(scriptDTO.getStudent());
-    programService.savePrograms(scriptDTO.getProgramDTOList());
+    studentService.addStudent(scriptDTO);
 
     return new ResponseEntity<>(HttpStatus.CREATED);
   }

@@ -1,11 +1,13 @@
 package com.example.fedex_backend.models.program;
 
+import com.example.fedex_backend.models.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +23,9 @@ public class Program {
 
     @Column(unique = true)
     private String programName;
+
+    @ManyToMany
+    private List<Student> studentList;
 
     private Boolean isAllowed;
 
