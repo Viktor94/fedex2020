@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/programs")
 public class ProgramController {
 
-  private final ProgramService programService;
+    private final ProgramService programService;
 
-  @Autowired
-  public ProgramController(ProgramService programService) {
-    this.programService = programService;
-  }
+    @Autowired
+    public ProgramController(ProgramService programService) {
+        this.programService = programService;
+    }
 
-  @GetMapping("")
-  public ResponseEntity<?> getAllProgram() {
-    return new ResponseEntity<>(programService.getAllProgram(), HttpStatus.OK);
-  }
+    @GetMapping("")
+    public ResponseEntity<?> getAllProgram() {
+        return new ResponseEntity<>(programService.getAllProgram(), HttpStatus.OK);
+    }
 }

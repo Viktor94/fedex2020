@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,19 +19,22 @@ public class Program {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
     private Long id;
 
     @Column(unique = true)
     private String programName;
 
     @ManyToMany
-    private List<Student> studentList;
+    private List<Student> studentList = new ArrayList<>();
 
     private Boolean isAllowed;
 
-   public Program(ProgramDTO programDTO) {
+    public Program(ProgramDTO programDTO) {
         this.programName = programDTO.getProgramName();
         this.isAllowed = true;
+    }
+
+    public void addStudent(Student student) {
+        this.studentList.add(student);
     }
 }

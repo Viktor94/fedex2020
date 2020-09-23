@@ -1,18 +1,17 @@
 package com.example.fedex_backend.services.student;
 
-import com.example.fedex_backend.models.program.Program;
-import com.example.fedex_backend.models.script.ScriptDTO;
 import com.example.fedex_backend.models.student.Student;
 import com.example.fedex_backend.repositories.StudentRepository;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
 import com.example.fedex_backend.services.program.ProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -27,22 +26,22 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public void addStudent(ScriptDTO scriptDTO) {
-    Student student = scriptDTO.getStudent();
-    if (!isStudentExist(student.getScriptCode())) {
+  public Student addStudent(Student student) {
+    Optional<Student> optionalStudent = isStudentExist(student.getScriptCode());
+    if (optionalStudent.isEmpty()) {
       student.setDate(new Date(System.currentTimeMillis()));
-
-      saveStudentWithPrograms(student, scriptDTO);
+      return saveStudent(student);
     } else {
-      Student student1 = studentRepository.findByScriptCode(student.getScriptCode()).get();
-      student1.setDate(new Date(System.currentTimeMillis()));
-      student1.setSuspicious(false);
-      saveStudentWithPrograms(student1, scriptDTO);
+      Student existingStudent = optionalStudent.get();
+      existingStudent.setDate(new Date(System.currentTimeMillis()));
+      existingStudent.setSuspicious(false);
+      return saveStudent(existingStudent);
     }
   }
 
-  private boolean isStudentExist(String scriptCode) {
-    return studentRepository.findByScriptCode(scriptCode).isPresent();
+  @Override
+  public Student saveStudent(Student student) {
+      return studentRepository.save(student);
   }
 
   @Scheduled(fixedRate = 60000)
@@ -58,9 +57,9 @@ public class StudentServiceImpl implements StudentService {
     }
   }
 
-private void saveStudentWithPrograms (Student student, ScriptDTO scriptDTO){
-  List <Program> programList = programService.savePrograms(scriptDTO.getProgramDTOList());
-  student.setPrograms(programList);
-  studentRepository.save(student);
-}
+  private Optional<Student> isStudentExist(String scriptCode) {
+    return studentRepository.findByScriptCode(scriptCode);
+  }
+
+
 }
