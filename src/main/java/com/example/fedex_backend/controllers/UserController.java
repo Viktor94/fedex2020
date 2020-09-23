@@ -52,6 +52,6 @@ public class UserController {
     final String jwt = jwtUtil.generateToken(userDetails, 60);
     ResponseDTO responseDTO = new ResponseDTO(jwt);
 
-    return new ResponseEntity<>(jwt, HttpStatus.OK);
+    return new ResponseEntity<>(responseDTO, HttpStatus.OK);
   }
 }
