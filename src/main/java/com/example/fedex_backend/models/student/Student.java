@@ -35,6 +35,10 @@ public class Student {
   private String firstName;
   private String lastName;
   private Date date;
+  private Integer kppm;
+  private Integer cursorTravelDistance;
+  private Integer buttonsPressed;
+  private Integer scrollWheelActivity;
 
   @Column(columnDefinition = "boolean default false")
   private Boolean suspicious;
@@ -43,5 +47,11 @@ public class Student {
     this.scriptCode = studentDTO.getScriptCode();
     this.firstName = studentDTO.getFirstName();
     this.lastName = studentDTO.getLastName();
+  }
+
+  public void setMU(Integer cursorTravelDistance, Integer buttonsPressed, Integer scrollWheelActivity) {
+    this.cursorTravelDistance = cursorTravelDistance;
+    this.buttonsPressed = buttonsPressed;
+    this.scrollWheelActivity = scrollWheelActivity;
   }
 }
