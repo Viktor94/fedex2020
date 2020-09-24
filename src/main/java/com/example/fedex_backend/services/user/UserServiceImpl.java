@@ -69,7 +69,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
       throw new MissingFieldException(temp);
     }
     if (isUserValidByEmail(userRegisterDTO.getUsername())) {
-      throw new UsernameAlreadyTakenException("Username already taken, please choose an other one.");
+      throw new UsernameAlreadyTakenException(
+          "Username already taken, please choose an other one.");
     }
 
     User user = new User(userRegisterDTO.getUsername(),

@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/scripts")
+@RequestMapping("/script-management")
 public class ScriptController {
 
-    private ScriptService scriptService;
+  private ScriptService scriptService;
 
-    @Autowired
-    public ScriptController(ScriptService scriptService) {
-        this.scriptService = scriptService;
-    }
+  @Autowired
+  public ScriptController(ScriptService scriptService) {
+    this.scriptService = scriptService;
+  }
 
-    @PostMapping(value = "")
-    public ResponseEntity<?> addScript(@RequestBody ScriptDTO scriptDTO) {
-        scriptService.manageScript(scriptDTO);
+  @PostMapping(value = "/scripts")
+  public ResponseEntity<?> addScript(@RequestBody ScriptDTO scriptDTO) {
+    scriptService.manageScript(scriptDTO);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
 }
