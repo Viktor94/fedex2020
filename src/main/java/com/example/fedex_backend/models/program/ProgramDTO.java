@@ -12,5 +12,5 @@ import lombok.Setter;
 public class ProgramDTO {
 
   private String name;
-  private Long memory;
+  private Double memory;
 }

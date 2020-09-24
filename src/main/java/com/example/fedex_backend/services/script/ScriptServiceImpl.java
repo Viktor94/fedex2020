@@ -25,9 +25,11 @@ public class ScriptServiceImpl implements ScriptService {
   public void manageScript(ScriptDTO scriptDTO) {
     Student student = new Student(scriptDTO.getStudentDTO());
     Student savedStudent = studentService.addStudent(student);
-    List<Program> programList = programService
-        .savePrograms(savedStudent, scriptDTO.getProgramDTOList());
+    List<Program> programList =
+        programService.savePrograms(savedStudent, scriptDTO.getProgramDTOList());
     savedStudent.setPrograms(programList);
     studentService.saveStudent(savedStudent);
+    programService.saveProgramMemoryUsage(savedStudent, scriptDTO.getProgramDTOList());
+    programService.saveProgramCpuUsage(savedStudent, scriptDTO.getCpuUsageDTO());
   }
 }
