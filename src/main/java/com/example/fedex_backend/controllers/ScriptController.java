@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/script-management")
 public class ScriptController {
 
-  private ScriptService scriptService;
+  private final ScriptService scriptService;
 
   @Autowired
   public ScriptController(ScriptService scriptService) {
