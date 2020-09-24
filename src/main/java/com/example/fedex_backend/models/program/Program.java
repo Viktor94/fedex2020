@@ -28,14 +28,13 @@ public class Program {
 
   @Column(unique = true)
   private String programName;
-  @JsonBackReference
-  @ManyToMany
-  private List<Student> studentList = new ArrayList<>();
+
+  @JsonBackReference @ManyToMany private List<Student> studentList = new ArrayList<>();
 
   private Boolean isAllowed;
 
   public Program(ProgramDTO programDTO) {
-    this.programName = programDTO.getProgramName();
+    this.programName = programDTO.getName();
     this.isAllowed = true;
   }
 
