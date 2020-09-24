@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/student-management")
 public class StudentController {
-    private StudentService studentService;
 
-    @Autowired
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
+  private StudentService studentService;
 
-    @GetMapping("")
-    public ResponseEntity<?> getAllStudent() {
-        return new ResponseEntity<>( studentService.getAllStudentFilteredBySuspicion(), HttpStatus.OK);
-    }
+  @Autowired
+  public StudentController(StudentService studentService) {
+    this.studentService = studentService;
+  }
+
+  @GetMapping("/students")
+  public ResponseEntity<?> getAllStudent() {
+    return new ResponseEntity<>(studentService.getAllStudentFilteredBySuspicion(), HttpStatus.OK);
+  }
 }

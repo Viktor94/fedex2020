@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class StudentDTO {
 
-    private String scriptCode;
-    private String firstName;
-    private String lastName;
+  private String scriptCode;
+  private String firstName;
+  private String lastName;
 }

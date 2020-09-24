@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProgramDTO {
 
-    private String programName;
-    private Long usedMemory;
+  private String programName;
+  private Long usedMemory;
 }

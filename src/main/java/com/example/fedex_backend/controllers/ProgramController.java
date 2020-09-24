@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/programs")
+@RequestMapping("/program-management")
 public class ProgramController {
 
-    private final ProgramService programService;
+  private final ProgramService programService;
 
-    @Autowired
-    public ProgramController(ProgramService programService) {
-        this.programService = programService;
-    }
+  @Autowired
+  public ProgramController(ProgramService programService) {
+    this.programService = programService;
+  }
 
-    @GetMapping("")
-    public ResponseEntity<?> getAllProgram() {
-        return new ResponseEntity<>(programService.getAllProgram(), HttpStatus.OK);
-    }
+  @GetMapping("/programs")
+  public ResponseEntity<?> getAllProgram() {
+    return new ResponseEntity<>(programService.getAllProgram(), HttpStatus.OK);
+  }
 }
