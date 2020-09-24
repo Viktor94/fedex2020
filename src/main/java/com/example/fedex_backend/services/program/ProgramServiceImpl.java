@@ -1,7 +1,10 @@
 package com.example.fedex_backend.services.program;
 
+import com.example.fedex_backend.exceptions.ProgramException;
+import com.example.fedex_backend.exceptions.ProgramNotFoundByIdException;
 import com.example.fedex_backend.models.program.Program;
 import com.example.fedex_backend.models.program.ProgramDTO;
+import com.example.fedex_backend.models.program.ProgramUpdateDTO;
 import com.example.fedex_backend.models.student.Student;
 import com.example.fedex_backend.repositories.ProgramRepository;
 import java.util.ArrayList;
@@ -36,5 +39,17 @@ public class ProgramServiceImpl implements ProgramService {
     }
     programRepository.saveAll(programList);
     return programList;
+  }
+
+  @Override
+  public void updateProgramSuspicion(Long id, ProgramUpdateDTO programUpdateDTO) throws ProgramException {
+    Program program = programRepository.findById(id).orElse(null);
+    if (program!=null) {
+      program.setIsAllowed(programUpdateDTO.getIsAllowed());
+      programRepository.save(program);
+    } else {
+      throw new ProgramNotFoundByIdException("User not found with the provided id: " + id);
+    }
+
   }
 }
