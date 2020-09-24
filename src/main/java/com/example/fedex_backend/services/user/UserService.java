@@ -1,4 +1,4 @@
-package com.example.fedex_backend.services;
+package com.example.fedex_backend.services.user;
 
 
 import com.example.fedex_backend.exceptions.MissingFieldException;

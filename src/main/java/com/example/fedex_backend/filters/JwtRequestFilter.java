@@ -1,7 +1,7 @@
 package com.example.fedex_backend.filters;
 
 import com.example.fedex_backend.security.JwtUtil;
-import com.example.fedex_backend.services.UserService;
+import com.example.fedex_backend.services.user.UserService;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import java.io.IOException;
