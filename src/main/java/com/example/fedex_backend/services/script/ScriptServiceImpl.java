@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScriptServiceImpl implements ScriptService {
 
-  private StudentService studentService;
-  private ProgramService programService;
+  private final StudentService studentService;
+  private final ProgramService programService;
 
   @Autowired
   public ScriptServiceImpl(StudentService studentService, ProgramService programService) {
