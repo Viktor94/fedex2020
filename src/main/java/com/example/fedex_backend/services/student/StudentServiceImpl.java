@@ -1,5 +1,7 @@
 package com.example.fedex_backend.services.student;
 
+import com.example.fedex_backend.models.dtos.KPPMDTO;
+import com.example.fedex_backend.models.dtos.MUDTO;
 import com.example.fedex_backend.models.program.Program;
 import com.example.fedex_backend.models.student.Student;
 import com.example.fedex_backend.repositories.StudentRepository;
@@ -58,6 +60,24 @@ public class StudentServiceImpl implements StudentService {
       filteredStudentList.add(student);
     }
     return filteredStudentList;
+  }
+
+  @Override
+  public void updateKPPM(KPPMDTO kppmdto) {
+    Optional<Student> student = studentRepository.findByScriptCode(kppmdto.getStudentDTO().getScriptCode());
+    if (student.isPresent()) {
+      student.get().setKppm(kppmdto.getKeypressed());
+      studentRepository.save(student.get());
+    }
+  }
+
+  @Override
+  public void updateMU(MUDTO mudto) {
+    Optional<Student> student = studentRepository.findByScriptCode(mudto.getStudentDTO().getScriptCode());
+    if (student.isPresent()) {
+      student.get().setMU(mudto.getCursorTravelDistance(), mudto.getButtonsPressed(), mudto.getScrollWheelActivity());
+      studentRepository.save(student.get());
+    }
   }
 
   @Scheduled(fixedRate = 60000)
