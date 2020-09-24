@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProgramDTO {
+public class CpuDTO {
 
   private String name;
-  private Long memory;
+  private Double cpuUsage;
 }
