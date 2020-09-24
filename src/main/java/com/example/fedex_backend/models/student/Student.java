@@ -1,6 +1,9 @@
 package com.example.fedex_backend.models.student;
 
+import com.example.fedex_backend.models.ProgramCpuUsage;
+import com.example.fedex_backend.models.ProgramMemoryUsage;
 import com.example.fedex_backend.models.program.Program;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +33,13 @@ public class Student {
   @Column(unique = true)
   private String scriptCode;
 
-  @ManyToMany
-  private List<Program> programs = new ArrayList<>();
+  @ManyToMany private List<Program> programs = new ArrayList<>();
+
+  @OneToMany(mappedBy = "student")
+  private List<ProgramCpuUsage> programCpuUsages = new ArrayList<>();
+
+  @OneToMany(mappedBy = "student")
+  private List<ProgramMemoryUsage> programMemoryUsages = new ArrayList<>();
 
   private String firstName;
   private String lastName;
@@ -49,7 +58,8 @@ public class Student {
     this.lastName = studentDTO.getLastName();
   }
 
-  public void setMU(Integer cursorTravelDistance, Integer buttonsPressed, Integer scrollWheelActivity) {
+  public void setMU(
+      Integer cursorTravelDistance, Integer buttonsPressed, Integer scrollWheelActivity) {
     this.cursorTravelDistance = cursorTravelDistance;
     this.buttonsPressed = buttonsPressed;
     this.scrollWheelActivity = scrollWheelActivity;
