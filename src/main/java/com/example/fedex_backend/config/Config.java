@@ -1,6 +1,8 @@
 package com.example.fedex_backend.config;
 
 import java.util.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -28,6 +30,13 @@ public class Config {
         "API, version 1",
         "",
         new Contact("", "", ""),
-        "", "", Collections.emptyList());
+        "",
+        "",
+        Collections.emptyList());
+  }
+
+  @Bean
+  public Logger logger() {
+    return LoggerFactory.getLogger(getClass());
   }
 }

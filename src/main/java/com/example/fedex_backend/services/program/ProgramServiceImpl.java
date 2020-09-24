@@ -9,6 +9,7 @@ import com.example.fedex_backend.models.student.Student;
 import com.example.fedex_backend.repositories.ProgramRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class ProgramServiceImpl implements ProgramService {
 
   private final ProgramRepository programRepository;
+  private Logger LOGGER;
 
   @Autowired
   public ProgramServiceImpl(ProgramRepository programRepository) {
@@ -42,14 +44,15 @@ public class ProgramServiceImpl implements ProgramService {
   }
 
   @Override
-  public void updateProgramSuspicion(Long id, ProgramUpdateDTO programUpdateDTO) throws ProgramException {
+  public void updateProgramSuspicion(Long id, ProgramUpdateDTO programUpdateDTO)
+      throws ProgramException {
     Program program = programRepository.findById(id).orElse(null);
-    if (program!=null) {
+    if (program != null) {
       program.setIsAllowed(programUpdateDTO.getIsAllowed());
       programRepository.save(program);
     } else {
+      LOGGER.info("User not found with the provided id: " + id);
       throw new ProgramNotFoundByIdException("User not found with the provided id: " + id);
     }
-
   }
 }
