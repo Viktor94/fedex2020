@@ -1,6 +1,7 @@
 package com.example.fedex_backend.models.program;
 
 import com.example.fedex_backend.models.student.Student;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Program {
 
     @Column(unique = true)
     private String programName;
-
+    @JsonBackReference
     @ManyToMany
     private List<Student> studentList = new ArrayList<>();
 

@@ -1,6 +1,7 @@
 package com.example.fedex_backend.models.student;
 
 import com.example.fedex_backend.models.program.Program;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,13 +26,16 @@ public class Student {
     @Column(unique = true)
     private String scriptCode;
 
+
     @ManyToMany
     private List<Program> programs = new ArrayList<>();
 
     private String firstName;
     private String lastName;
     private Date date;
-    private Boolean suspicious = false;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean suspicious;
 
     public Student(StudentDTO studentDTO) {
         this.scriptCode = studentDTO.getScriptCode();
