@@ -1,4 +1,4 @@
-# Fedex_2020_Python_Script
+# Fedex_2020_Backend
 
 [Click here](https://fedex-backend.herokuapp.com/swagger-ui.html) to read our documentation.
 
