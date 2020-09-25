@@ -4,6 +4,7 @@ import com.example.fedex_backend.models.student.Student;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,9 @@ public class Program {
   @Column(unique = true)
   private String programName;
 
-  @JsonBackReference @ManyToMany private List<Student> studentList = new ArrayList<>();
+  @JsonBackReference
+  @ManyToMany(cascade = { CascadeType.ALL })
+  private List<Student> studentList = new ArrayList<>();
 
   private Boolean isAllowed;
 
