@@ -50,6 +50,7 @@ public class StudentServiceImpl implements StudentService {
   @Override
   public List<Student> getAllStudentFilteredBySuspicion() {
     List<Student> unfilteredStudentList = (List<Student>) studentRepository.findAll();
+    /*
     List<Student> filteredStudentList = new ArrayList<>();
     for (Student student : unfilteredStudentList) {
       List<Program> filteredProgramList = student.getPrograms()
@@ -59,12 +60,16 @@ public class StudentServiceImpl implements StudentService {
       student.setPrograms(filteredProgramList);
       filteredStudentList.add(student);
     }
+
     return filteredStudentList;
+     */
+    return unfilteredStudentList;
   }
 
   @Override
   public void updateKPPM(KPPMDTO kppmdto) {
-    Optional<Student> student = studentRepository.findByScriptCode(kppmdto.getStudentDTO().getScriptCode());
+    Optional<Student> student =
+        studentRepository.findByScriptCode(kppmdto.getStudentDTO().getScriptCode());
     if (student.isPresent()) {
       student.get().setKppm(kppmdto.getKeypressed());
       studentRepository.save(student.get());
@@ -73,9 +78,15 @@ public class StudentServiceImpl implements StudentService {
 
   @Override
   public void updateMU(MUDTO mudto) {
-    Optional<Student> student = studentRepository.findByScriptCode(mudto.getStudentDTO().getScriptCode());
+    Optional<Student> student =
+        studentRepository.findByScriptCode(mudto.getStudentDTO().getScriptCode());
     if (student.isPresent()) {
-      student.get().setMU(mudto.getCursorTravelDistance(), mudto.getButtonsPressed(), mudto.getScrollWheelActivity());
+      student
+          .get()
+          .setMU(
+              mudto.getCursorTravelDistance(),
+              mudto.getButtonsPressed(),
+              mudto.getScrollWheelActivity());
       studentRepository.save(student.get());
     }
   }
@@ -83,9 +94,9 @@ public class StudentServiceImpl implements StudentService {
   @Scheduled(fixedRate = 60000)
   public void updateStudents() {
     Date date = new Date(System.currentTimeMillis());
-    List<Student> studentList = StreamSupport
-        .stream(studentRepository.findAll().spliterator(), false)
-        .collect(Collectors.toList());
+    List<Student> studentList =
+        StreamSupport.stream(studentRepository.findAll().spliterator(), false)
+            .collect(Collectors.toList());
 
     for (Student student : studentList) {
       student.setSuspicious(date.getTime() - student.getDate().getTime() > 60000);
@@ -96,6 +107,4 @@ public class StudentServiceImpl implements StudentService {
   private Optional<Student> isStudentExist(String scriptCode) {
     return studentRepository.findByScriptCode(scriptCode);
   }
-
-
 }
