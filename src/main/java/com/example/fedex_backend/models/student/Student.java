@@ -33,7 +33,8 @@ public class Student {
   @Column(unique = true)
   private String scriptCode;
 
-  @ManyToMany private List<Program> programs = new ArrayList<>();
+  @ManyToMany(mappedBy = "studentList")
+  private List<Program> programs = new ArrayList<>();
 
   @OneToMany(mappedBy = "student")
   private List<ProgramCpuUsage> programCpuUsages = new ArrayList<>();
