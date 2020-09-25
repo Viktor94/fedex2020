@@ -23,7 +23,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/user-management/register", "/user-management/login", "/script-management/scripts").permitAll()
+                .authorizeRequests().antMatchers("/user-management/register", "/user-management/login", "/script-management/scripts", "/script-management/kppm", "/script-management/mu" ).permitAll()
                 .antMatchers("/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()

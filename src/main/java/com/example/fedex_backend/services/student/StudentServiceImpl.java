@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
   @Override
   public List<Student> getAllStudentFilteredBySuspicion() {
     List<Student> unfilteredStudentList = (List<Student>) studentRepository.findAll();
-    /*
+
     List<Student> filteredStudentList = new ArrayList<>();
     for (Student student : unfilteredStudentList) {
       List<Program> filteredProgramList = student.getPrograms()
@@ -62,8 +62,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     return filteredStudentList;
-     */
-    return unfilteredStudentList;
+    
+    /*return unfilteredStudentList;*/
   }
 
   @Override
